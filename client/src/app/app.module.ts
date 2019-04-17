@@ -1,17 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from './components/shared/shared.module';
+import { AppRoutingModule } from './app-routing';
+import { HomeModule } from './components/home/home.module';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    MDBBootstrapModule.forRoot(),
+    FormsModule,
+    SharedModule,
+    AppRoutingModule,
+    HomeModule
   ],
+  entryComponents: [ 
+    LoginComponent,
+    RegisterComponent
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })
