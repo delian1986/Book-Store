@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormsModule } from '@angular/forms';
+import { Validators, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { MDBModalRef } from 'angular-bootstrap-md';
 
 
@@ -9,13 +9,23 @@ import { MDBModalRef } from 'angular-bootstrap-md';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginFormModalEmail = new FormControl('', Validators.email);
-  loginFormModalPassword = new FormControl('', Validators.required);
+
+  loginForm:FormGroup;
   constructor(
-    public modalRef: MDBModalRef
+    public modalRef: MDBModalRef,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [ Validators.required] ]
+    })
+  }
+
+  login() {
+    const { email, password } = this.loginForm.value;
+    console.log(email,password);
   }
 
 }

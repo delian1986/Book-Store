@@ -26,6 +26,7 @@ import { CarouselComponent } from "./carousel/carousel.component";
         CardsFreeModule,
         ButtonsModule
     ],
+    
     exports:[
         HomeComponent,
         JumbotronComponent,

@@ -72,6 +72,7 @@ module.exports = {
              token, 
              userId: user._id.toString(),
              role:user.roles[0],
+             email:user.email,
              enrolledCourses:user.enrolledCourses
            });
       })
