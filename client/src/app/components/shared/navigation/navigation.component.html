@@ -1,13 +1,13 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
     <mdb-navbar-brand>
-        <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
+        <a class="logo navbar-brand" routerLink='/'><strong>Navbar</strong></a>
     </mdb-navbar-brand>
     <links>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active waves-light" mdbWavesEffect>
                 <a class="nav-link">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item waves-light" mdbWavesEffect>
+            <!-- <li *ngIf="" class="nav-item waves-light" mdbWavesEffect>
                 <a class="nav-link">Features</a>
             </li>
             <li class="nav-item waves-light" mdbWavesEffect>
@@ -15,6 +15,9 @@
             </li>
             <li class="nav-item waves-light" mdbWavesEffect>
                 <a class="nav-link">Opinions</a>
+            </li> -->
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link">Welcome, {{email$|async}}</a>
             </li>
         </ul>
         
