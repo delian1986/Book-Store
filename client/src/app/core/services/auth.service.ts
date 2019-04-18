@@ -1,3 +1,4 @@
+import * as jwt_decode from 'jwt-decode'
 import { Injectable } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { Store, select } from '@ngrx/store'
@@ -31,18 +32,19 @@ export class AuthService {
 
         if (localStorage.getItem('authtoken')) {
             const authtoken = localStorage.getItem('authtoken');
-            const email = localStorage.getItem('email');
-            const isAdmin = localStorage.getItem('isAdmin') === 'Admin';
-            const userId = localStorage.getItem('userId');
-            const authData = new AuthModel(authtoken, email, userId, isAdmin, true);
-            this.store.dispatch(new Login(authData))
+
+            try {
+                const decoded = jwt_decode(authtoken)
+                const authData = new AuthModel(authtoken, decoded.username, decoded.isAdmin, decoded.userId, true)
+                this.store.dispatch(new Login(authData))
+
+            } catch (err) {
+                this.tostr.error('Invalid token', 'Warning!')
+            }
         }
     }
 
-    login(body:LoginModel){
-        return this.http.post(this.BASE_URL+'login',body );
+    login(body: LoginModel) {
+        return this.http.post(this.BASE_URL + 'login', body);
     }
-
-
-
 }
