@@ -15,9 +15,16 @@ import { LoginModel } from "../models/login.model";
 export class AuthService {
     private readonly BASE_URL = `http://localhost:5000/auth/`;
 
+<<<<<<< HEAD
     public email: string
     public isUserAdmin: boolean
     public isUserAuthenticated: boolean
+=======
+    private userId: string
+    private isUserAdmin: boolean
+    private isUserAuthenticated: boolean
+    private email: string;
+>>>>>>> 127ef1e38a74da0ba2b77b9ddd0fb0e694cd7bdf
 
     constructor(
         private http: HttpClient,

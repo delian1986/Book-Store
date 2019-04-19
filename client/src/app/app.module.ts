@@ -16,6 +16,7 @@ import { appReducers } from './core/store/app.reducers';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { AuthService } from './core/services/auth.service';
 
 @NgModule({
   declarations: [
