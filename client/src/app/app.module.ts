@@ -14,7 +14,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { ToastrModule } from 'ngx-toastr';
 import { appReducers } from './core/store/app.reducers';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
@@ -33,7 +33,8 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     HomeModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appReducers),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   entryComponents: [ 
     LoginComponent,

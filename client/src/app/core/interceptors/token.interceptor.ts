@@ -46,27 +46,36 @@ export class TokenInterceptor implements HttpInterceptor {
             .handle(req)
             .pipe(tap((res: HttpEvent<any>) => {
                 if (res instanceof HttpResponse && req.url.endsWith('auth/login')) {
-                    this.saveToken(res.body);
+                    this.saveCredentials(res.body);
                 }
 
-                if (res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/signup')) {
+                if (res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/register')) {
                     this.tostr.success(res.body.message)
                 }
             }))
     }
 
-    private saveToken(body) {
-        this.decodeToken(body.token);
+    private saveCredentials(body) {
+        // this.decodeToken(body.token);
+        debugger
         const authToken = body.token;
+        const userId = body.userId;
+        const isAdmin = body.role === 'Admin';
+        const email = body.email;
+        const authData = new AuthModel(authToken, email, userId, isAdmin, true);
+        this.store.dispatch(new Login(authData));
+
         localStorage.setItem('token', authToken);
+        localStorage.setItem('userId', userId);
+        localStorage.setItem('isAdmin', isAdmin.toString());
+        localStorage.setItem('email', email);
+        debugger
         this.tostr.success(body.message);
 
     }
 
     private decodeToken(token) {
         const decoded = jwt_decode(token)
-        const authData = new AuthModel(token, decoded.username, decoded.isAdmin, decoded.userId, true);
-        this.store.dispatch(new Login(authData));
     }
 
 }
