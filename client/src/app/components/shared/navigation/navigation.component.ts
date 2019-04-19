@@ -17,7 +17,8 @@ export class NavigationComponent implements OnInit {
     private store: State<AppState>
   ) {
     debugger
-    this.email=this.authService.email;
+    this.store.pipe(select(state => state.auth.email))
+    .subscribe(data => this.email = data);
 
   }
 

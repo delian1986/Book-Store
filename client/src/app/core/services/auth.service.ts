@@ -9,13 +9,16 @@ import AuthModel from "../models/authModel";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginModel } from "../models/login.model";
 
-@Injectable()
+@Injectable({
+    providedIn:"root"
+})
 export class AuthService {
     private readonly BASE_URL = `https://localhost:5000/auth/`;
 
-    private username: string
+    private userId: string
     private isUserAdmin: boolean
     private isUserAuthenticated: boolean
+    private email: string;
 
     constructor(
         private http: HttpClient,
@@ -28,7 +31,7 @@ export class AuthService {
         this.store.pipe(select(state => state.auth.isAuthenticated))
             .subscribe(data => this.isUserAuthenticated = data);
         this.store.pipe(select(state => state.auth.email))
-            .subscribe(data => this.username = data);
+            .subscribe(data => this.email = data);
 
         if (localStorage.getItem('authtoken')) {
             const authtoken = localStorage.getItem('authtoken');
