@@ -1,5 +1,5 @@
-import { authReducer } from "./auth/auth.reducers";
+// import { authReducer } from "./auth/auth.reducers";
 
-export const appReducers={
-    auth:authReducer
-}
+// export const appReducers={
+//     auth:authReducer
+// }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { LoginComponent } from '../../auth/login/login.component';
 import { MDBModalService, MDBModalRef } from 'angular-bootstrap-md';
 import { RegisterComponent } from '../../auth/register/register.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-jumbotron',
@@ -9,22 +10,25 @@ import { RegisterComponent } from '../../auth/register/register.component';
   styleUrls: ['./jumbotron.component.scss']
 })
 
-export class JumbotronComponent implements OnInit {
+export class JumbotronComponent implements DoCheck {
   modalRef: MDBModalRef;
+  isAnonymous:boolean=true;
   
   constructor(
-    private modalService: MDBModalService
+    private modalService: MDBModalService,
+    private authService:AuthService
   ) { }
 
-  ngOnInit() {
+  ngDoCheck(){
+    this.isAnonymous=!this.authService.isAuth();
   }
 
-  loginModal(){
-    this.modalRef = this.modalService.show(LoginComponent)
+   loginModal(){
+    this.modalRef = this.modalService.show(LoginComponent);
   }
 
   registerModal(){
-    this.modalRef = this.modalService.show(RegisterComponent)
+    this.modalRef = this.modalService.show(RegisterComponent);
   }
 
 }

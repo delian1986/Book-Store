@@ -12,7 +12,9 @@
     <!-- Grid column -->
     <div class="col-xl-7 pb-2">
 
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga aliquid dolorem ea distinctio exercitationem delectus qui, quas eum architecto, amet quasi accusantium, fugit consequatur ducimus obcaecati numquam molestias hic itaque accusantium doloremque laudantium, totam rem aperiam.</p>
+      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga aliquid dolorem ea distinctio
+        exercitationem delectus qui, quas eum architecto, amet quasi accusantium, fugit consequatur ducimus obcaecati
+        numquam molestias hic itaque accusantium doloremque laudantium, totam rem aperiam.</p>
 
     </div>
     <!-- Grid column -->
@@ -22,10 +24,13 @@
 
   <hr class="my-4">
 
-  <div class="pt-2">
-    <button type="button" mdbBtn color="blue" (click)="loginModal()" mdbWavesEffect>Login <i class="fas fa-user-alt"></i></button>
-    <button type="button" mdbBtn color="primary" outline="true" (click)="registerModal()" mdbWavesEffect> Register <mdb-icon fas icon="download" class="ml-1"></mdb-icon></button>
-  </div>
-
+  <ng-template [ngIf]="isAnonymous">
+    <div class="pt-2">
+      <button type="button" mdbBtn color="blue" (click)="loginModal()" mdbWavesEffect>Login <i
+          class="fas fa-user-alt"></i></button>
+      <button type="button" mdbBtn color="primary" outline="true" (click)="registerModal()" mdbWavesEffect> Register
+        <mdb-icon fas icon="download" class="ml-1"></mdb-icon></button>
+    </div>
+  </ng-template>
 </div>
 <!-- Jumbotron -->

@@ -12,11 +12,10 @@ import { HomeModule } from './components/home/home.module';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
-import { appReducers } from './core/store/app.reducers';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
-import { AuthService } from './core/services/auth.service';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -25,6 +24,8 @@ import { AuthService } from './core/services/auth.service';
     RegisterComponent,
   ],
   imports: [
+    // StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({}),
     BrowserModule,
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
@@ -33,7 +34,6 @@ import { AuthService } from './core/services/auth.service';
     AppRoutingModule,
     HomeModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(appReducers),
     ToastrModule.forRoot(),
     HttpClientModule
   ],

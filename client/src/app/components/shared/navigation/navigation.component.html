@@ -3,7 +3,7 @@
         <a class="logo navbar-brand" routerLink='/'><strong>Navbar</strong></a>
     </mdb-navbar-brand>
     <links>
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ">
             <li class="nav-item active waves-light" mdbWavesEffect>
                 <a class="nav-link">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -16,10 +16,15 @@
             <li class="nav-item waves-light" mdbWavesEffect>
                 <a class="nav-link">Opinions</a>
             </li> -->
-            <li class="nav-item waves-light" mdbWavesEffect>
-                <a class="nav-link">Welcome, {{email$|async}}</a>
-            </li>
+            <ng-template [ngIf]="isAuth">
+                <li class="nav-item waves-light ml-auto float-right" mdbWavesEffect>
+                    <a class="nav-link">Welcome, {{ email }}</a>
+                </li>
+                <li class="nav-item waves-light" mdbWavesEffect>
+                    <a (click)="logout()" class="nav-link">Logout</a>
+                </li>
+            </ng-template>
         </ul>
-        
+
     </links>
 </mdb-navbar>
