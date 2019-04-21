@@ -17,6 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           switch (err.status) {
             case 400:
             case 401:
+            case 422:
               if (err.error.errors) {
                 const message = Object.keys(err.error.errors)
                   .map(e => err.error.errors[e])

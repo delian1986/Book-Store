@@ -9,18 +9,20 @@
       <form (ngSubmit)="login()" [formGroup]="loginForm">
       <div class="md-form mb-5">
         <i class="fas fa-envelope prefix grey-text"></i>
-        <input formControlName="email" type="email" id="defaultForm-email" class="form-control validate"
+        <input formControlName="email" type="email" id="defaultForm-email" class="form-control validate" 
           mdbInput>
         <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
-        <mdb-error *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched ||loginForm.get('email').dirty ">Email is required.</mdb-error>
+        <mdb-error *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('required')">Required Field</mdb-error>
+        <mdb-error *ngIf="loginForm.get('email').touched && loginForm.get('email').hasError('email')">Not valid email</mdb-error>
       </div>
   
       <div class="md-form mb-4">
         <i class="fas fa-lock prefix grey-text"></i>
-        <input formControlName="password" type="password" id="defaultForm-password" class="form-control validate"
+        <input formControlName="password" type="password" id="defaultForm-password" class="form-control validate" 
           mdbInput>
         <label data-error="wrong" data-success="right" for="defaultForm-password">Your password</label>
-        <mdb-error *ngIf="loginForm.get('password').hasError('required')">Password is required.</mdb-error>
+        <mdb-error *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')">Password is required!</mdb-error>
+        <mdb-error *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('minlength')">Your password must be at least 3 symbols</mdb-error>
 
       </div>
       <div class="modal-footer d-flex justify-content-center">

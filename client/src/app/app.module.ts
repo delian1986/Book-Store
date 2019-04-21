@@ -28,13 +28,13 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreDevtoolsModule.instrument({}),
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     FormsModule,
     SharedModule,
     AppRoutingModule,
     HomeModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot(),
     HttpClientModule
   ],
   entryComponents: [ 

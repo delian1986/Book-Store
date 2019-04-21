@@ -17,10 +17,10 @@ export class TokenInterceptor implements HttpInterceptor {
     constructor(
         private tostr: ToastrService,
     ) {
-       
+
     }
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        if (req.url.endsWith('/auth/login')) {
+        if (req.url.endsWith('login')) {
             req = req.clone({
                 setHeaders: {
                     'Content-Type': 'application/json'
@@ -38,11 +38,11 @@ export class TokenInterceptor implements HttpInterceptor {
         return next
             .handle(req)
             .pipe(tap((res: HttpEvent<any>) => {
-                if (res instanceof HttpResponse && req.url.endsWith('auth/login')) {
+                if (res instanceof HttpResponse && req.url.endsWith('login')) {
                     this.saveCredentials(res.body);
                 }
 
-                if (res instanceof HttpResponse && res.body.success && req.url.endsWith('/auth/register')) {
+                if (res instanceof HttpResponse && res.body && req.url.endsWith('register')) {
                     this.tostr.success(res.body.message)
                 }
             }))
@@ -61,6 +61,6 @@ export class TokenInterceptor implements HttpInterceptor {
         this.tostr.success(body.message);
 
     }
-  
+
 
 }

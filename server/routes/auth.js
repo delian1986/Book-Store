@@ -26,11 +26,11 @@ router.post('/register',
       .custom((value,{req})=>{
           return value===req.body.password
       }),
-    body('name')
-      .trim()
-      .not()
-      .isEmpty()
-      .withMessage('Please enter a valid name.')
+    // body('email')
+    //   .trim()
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage('Please enter a valid name.')
   ]
   , authController.register);
 router.post('/login', authController.login);

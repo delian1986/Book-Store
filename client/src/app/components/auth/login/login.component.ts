@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { MDBModalRef } from 'angular-bootstrap-md';
-import { LoginModel } from 'src/app/core/models/login.model';
+import { LoginModel } from 'src/app/core/models/auth/login.model';
 import { Subscription } from 'rxjs';
 import {AuthService} from './../../../core/services/auth.service';
 
@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [ Validators.required] ]
+      password: [null, [ Validators.required,Validators.minLength(3)] ],
+      
     })
   }
 

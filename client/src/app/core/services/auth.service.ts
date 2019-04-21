@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
-import { LoginModel } from "../models/login.model";
+import { LoginModel } from "../models/auth/login.model";
+import { RegisterModel } from "../models/auth/registerModel";
 
 @Injectable({
     providedIn:"root"
@@ -38,5 +39,9 @@ export class AuthService {
 
     login(body: LoginModel) {
         return this.http.post(this.BASE_URL + 'login', body);
+    }
+
+    register(body:RegisterModel){
+        return this.http.post(this.BASE_URL + 'register', body);
     }
 }

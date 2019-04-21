@@ -22,7 +22,7 @@ export class NavigationComponent implements DoCheck {
   }
 
   logout(){
-    localStorage.clear();
+    this.authService.logout();
 
   }
 
