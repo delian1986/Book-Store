@@ -20,11 +20,11 @@
             </ng-template>
 
             <ng-template [ngIf]="isAuth">
-                <li class="nav-item waves-light ml-auto float-right" mdbWavesEffect>
-                    <a class="nav-link">Welcome, {{ username }}</a>
-                </li>
                 <li class="nav-item waves-light" mdbWavesEffect>
                     <a routerLink="book/all" class="nav-link">Books</a>
+                </li>
+                <li class="nav-item waves-light ml-auto float-right" mdbWavesEffect>
+                    <a class="nav-link">Welcome, {{ username }}</a>
                 </li>
                 <li class="nav-item waves-light" mdbWavesEffect>
                     <a (click)="logout()" class="nav-link">Logout</a>

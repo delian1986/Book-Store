@@ -4,11 +4,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BookService } from 'src/app/core/services/book.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
+import { animations } from './book-list-animations';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss']
+  styleUrls: ['./book-list.component.scss'],
+  animations:animations
 })
 export class BookListComponent implements OnInit {
   @Output()

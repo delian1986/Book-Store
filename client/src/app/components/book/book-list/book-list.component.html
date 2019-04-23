@@ -1,6 +1,6 @@
 <div class="card-deck">
    
-    <app-card  *ngFor="let book of books"
+    <app-card [@bookList] *ngFor="let book of books"
     [book]="book"
     ></app-card>
   </div>
