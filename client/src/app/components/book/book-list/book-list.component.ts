@@ -15,6 +15,8 @@ import { animations } from './book-list-animations';
 export class BookListComponent implements OnInit {
   @Output()
   books:BookModel[];
+  protected pageSize: number = 6;
+  currentPage: number = 1;
   constructor(
     private spinner: NgxSpinnerService,
     private bookService: BookService,
@@ -29,6 +31,10 @@ export class BookListComponent implements OnInit {
         this.books = books;
         this.spinner.hide();
       })
+  }
+
+  changePage (page) {
+    this.currentPage = page
   }
 
 }

@@ -1,3 +1,23 @@
-<p>
-  create works!
-</p>
+<form (ngSubmit)="create()" [formGroup]="createBookForm">
+    <div class="md-form mb-5">
+      <i class="fas fa-envelope prefix grey-text"></i>
+      <input formControlName="title" type="text" id="defaultForm-title" class="form-control validate" 
+        mdbInput>
+      <label data-error="wrong" data-success="right" for="defaultForm-title">Your title</label>
+      <mdb-error *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('required')">Required Field</mdb-error>
+      <mdb-error *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('title')">Not valid title</mdb-error>
+    </div>
+
+    <div class="md-form mb-4">
+      <i class="fas fa-lock prefix grey-text"></i>
+      <input formControlName="text" type="author" id="defaultForm-author" class="form-control validate" 
+        mdbInput>
+      <label data-error="wrong" data-success="right" for="defaultForm-author">Your author</label>
+      <mdb-error *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('required')">author is required!</mdb-error>
+      <mdb-error *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('minlength')">Author name must be at least 3 symbols</mdb-error>
+
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button [disabled]="createBookForm.invalid" mdbBtn color="default" class="waves-light" mdbWavesEffect>Login</button>
+    </div>
+  </form>

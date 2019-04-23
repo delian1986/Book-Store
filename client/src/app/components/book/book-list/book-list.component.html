@@ -1,6 +1,24 @@
 <div class="card-deck">
    
-    <app-card [@bookList] *ngFor="let book of books"
+    <app-card [@bookList] *ngFor="let book of books | paginate: {
+      id: 'allBooks',
+      itemsPerPage: pageSize,
+      currentPage: currentPage
+    };"
     [book]="book"
     ></app-card>
   </div>
+
+  <pagination-controls
+    class="paginator"
+    id="allBooks"
+    (pageChange)="changePage($event)"
+    maxSize="9"
+    directionLinks="true"
+    autoHide="true"
+    previousLabel="Previous"
+    nextLabel="Next"
+    screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page">
+  </pagination-controls>
