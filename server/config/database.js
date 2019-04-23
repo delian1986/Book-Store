@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const User = require('../models/User');
+const Book=require('../models/Book');
 
 module.exports = config => {
     mongoose.connect(config.dbPath, {
@@ -11,6 +12,7 @@ module.exports = config => {
     const db = mongoose.connection;
     db.once('open', err => {
         if (err) throw err;
+        Book.seedBooks();
         User.seedAdminUser().then(() => {
             console.log('Database ready');                
         }).catch((reason) => {

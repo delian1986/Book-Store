@@ -4,33 +4,34 @@ import {
     CarouselModule, 
     WavesModule, 
     IconsModule, 
-    CardsFreeModule, 
     ButtonsModule 
 } from 'angular-bootstrap-md'
 import { HomeComponent } from "./home.component";
 import { JumbotronComponent } from "./jumbotron/jumbotron.component";
 import { CarouselComponent } from "./carousel/carousel.component";
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
     declarations:[
         HomeComponent,
         JumbotronComponent,
-        CarouselComponent
+        CarouselComponent,
     ],
     imports:[
         CommonModule,
         WavesModule,
         CarouselModule,
         IconsModule,
-        CardsFreeModule,
-        ButtonsModule
+        ButtonsModule,
+        SharedModule
     ],
     
     exports:[
         HomeComponent,
         JumbotronComponent,
-        CarouselComponent
+        CarouselComponent,
+        SharedModule
     ]
 })
 export class HomeModule{}

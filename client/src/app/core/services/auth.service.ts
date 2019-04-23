@@ -28,13 +28,13 @@ export class AuthService {
     }
 
     getIsAdmin(){
-        return localStorage.getItem('role')==='Admin';
+        return localStorage.getItem('isAdmin')==='true';
     }
 
     logout(){
         localStorage.clear();
         this.tostr.success('You ware logged out!');
-        this.router.navigate['/'];
+        this.router.navigate(['']);
     }
 
     login(body: LoginModel) {

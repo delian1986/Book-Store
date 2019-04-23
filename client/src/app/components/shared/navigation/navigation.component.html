@@ -1,21 +1,24 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
     <mdb-navbar-brand>
-        <a class="logo navbar-brand" routerLink='/'><strong>Navbar</strong></a>
+        <a class="logo navbar-brand" routerLink='/'><strong>BOOK STORE</strong></a>
     </mdb-navbar-brand>
     <links>
         <ul class="navbar-nav ">
-            <li class="nav-item active waves-light" mdbWavesEffect>
-                <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-            </li>
             <!-- <li *ngIf="" class="nav-item waves-light" mdbWavesEffect>
-                <a class="nav-link">Features</a>
-            </li>
-            <li class="nav-item waves-light" mdbWavesEffect>
-                <a class="nav-link">Pricing</a>
-            </li>
-            <li class="nav-item waves-light" mdbWavesEffect>
-                <a class="nav-link">Opinions</a>
-            </li> -->
+                    <a class="nav-link">Features</a>
+                </li>
+                <li class="nav-item waves-light" mdbWavesEffect>
+                    <a class="nav-link">Pricing</a>
+                </li>
+                <li class="nav-item waves-light" mdbWavesEffect>
+                    <a class="nav-link">Opinions</a>
+                </li> -->
+            <ng-template [ngIf]="isAdmin">
+                <li class="nav-item waves-light" mdbWavesEffect>
+                    <a routerLink="admin/create" class="nav-link">Create Book</a>
+                </li>
+            </ng-template>
+
             <ng-template [ngIf]="isAuth">
                 <li class="nav-item waves-light ml-auto float-right" mdbWavesEffect>
                     <a class="nav-link">Welcome, {{ email }}</a>
@@ -24,6 +27,8 @@
                     <a (click)="logout()" class="nav-link">Logout</a>
                 </li>
             </ng-template>
+
+
         </ul>
 
     </links>

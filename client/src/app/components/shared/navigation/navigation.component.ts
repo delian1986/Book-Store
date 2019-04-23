@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class NavigationComponent implements DoCheck {
   email: string;
   isAuth: boolean = false;
+  isAdmin: boolean=false;
 
   constructor(
     private authService:AuthService,
@@ -19,6 +20,7 @@ export class NavigationComponent implements DoCheck {
   ngDoCheck() {
     this.email = this.authService.getEmail();
     this.isAuth=this.authService.isAuth();
+    this.isAdmin=this.authService.getIsAdmin();
   }
 
   logout(){

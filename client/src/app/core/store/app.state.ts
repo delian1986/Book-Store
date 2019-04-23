@@ -1,5 +1,5 @@
-// import { AuthState } from "./auth/auth.state";
+import BookState from "./book/book.state";
 
-// export interface AppState {
-//     auth: AuthState
-// }
+export interface AppState {
+    book: BookState
+}

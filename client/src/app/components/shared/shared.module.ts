@@ -4,22 +4,34 @@ import { FooterComponent } from "./footer/footer.component";
 import { CommonModule } from "@angular/common";
 import { NavbarModule, 
     WavesModule, 
-    CarouselModule } from 'angular-bootstrap-md'
+    CarouselModule, 
+    CardsFreeModule,
+    ButtonsModule,
+
+    
+} from 'angular-bootstrap-md'
+import { RouterModule } from "@angular/router";
+import { CardComponent } from './card/card.component';
 
 @NgModule({
     declarations:[
         NavigationComponent,
-        FooterComponent
+        FooterComponent,
+        CardComponent
     ],
     imports:[
         CommonModule,
         NavbarModule,
         WavesModule,
-        CarouselModule
+        CarouselModule,
+        RouterModule,
+        CardsFreeModule,
+        
     ],
     exports:[
         NavigationComponent,
-        FooterComponent
+        FooterComponent,
+        CardComponent
 
     ]
 })

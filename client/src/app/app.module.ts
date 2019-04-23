@@ -16,6 +16,8 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { BookModule } from './components/book/book.module';
+import { appReducers } from './core/store/app.reducers';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     RegisterComponent,
   ],
   imports: [
-    // StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({}),
     BrowserModule,
     BrowserAnimationsModule,
@@ -35,7 +37,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AppRoutingModule,
     HomeModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BookModule,
   ],
   entryComponents: [ 
     LoginComponent,
