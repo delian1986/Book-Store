@@ -1,21 +1,15 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { 
-    WavesModule, 
-    IconsModule, 
-} from 'angular-bootstrap-md'
+import { BookRoutingModule } from "./book.routing.module";
 
 
 @NgModule({
-    declarations:[
+    declarations: [
     ],
-    imports:[
-        CommonModule,
-        WavesModule,
-        IconsModule,
+    imports: [
+        BookRoutingModule
     ],
-    
-    exports:[
+
+    exports: [
     ]
 })
-export class BookModule{}
+export class BookModule { }

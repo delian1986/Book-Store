@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import BookModel from "../models/book/book.model";
 import { Store } from "@ngrx/store";
 import { AppState } from "../store/app.state";
-import { GetLastBooks } from "../store/book/book.actions";
+import { GetLastBooks, GetAllBooks, } from "../store/book/book.actions";
 
 @Injectable({
     providedIn:"root"
@@ -21,6 +21,13 @@ export class BookService{
         this.http.get<BookModel[]>(this.BASE_URL+'last')
             .subscribe(books=>{
                 this.store.dispatch(new GetLastBooks(books));
+            })
+    }
+
+    getAllBooks(){
+        this.http.get<BookModel[]>(this.BASE_URL+'all')
+            .subscribe(books=>{
+                this.store.dispatch(new GetAllBooks(books));
             })
     }
 }

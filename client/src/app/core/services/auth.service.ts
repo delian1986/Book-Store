@@ -19,8 +19,8 @@ export class AuthService {
              
     }
 
-    getEmail(){
-        return localStorage.getItem('email');
+    getUsername(){
+        return localStorage.getItem('username');
     }
 
     isAuth(){

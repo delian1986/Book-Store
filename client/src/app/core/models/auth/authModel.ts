@@ -1,7 +1,7 @@
 export default class AuthModel {
     constructor(
         token: string,
-        email: string,
+        username: string,
         userId:string,
         isAdmin: boolean,
         isAuthenticated: boolean,

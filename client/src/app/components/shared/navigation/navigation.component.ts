@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements DoCheck {
-  email: string;
+  username: string;
   isAuth: boolean = false;
   isAdmin: boolean=false;
 
@@ -18,7 +18,7 @@ export class NavigationComponent implements DoCheck {
   }
 
   ngDoCheck() {
-    this.email = this.authService.getEmail();
+    this.username = this.authService.getUsername();
     this.isAuth=this.authService.isAuth();
     this.isAdmin=this.authService.getIsAdmin();
   }

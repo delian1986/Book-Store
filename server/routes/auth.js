@@ -1,38 +1,149 @@
-const router = require('express').Router();
-const { body } = require('express-validator/check');
-const authController = require('../controllers/auth');
-const User = require('../models/User');
+const express = require('express')
+const passport = require('passport')
+const validator = require('validator')
+const User = require('../models/User')
 
-router.post('/register',
-  [
-    // TODO: Add normalize email and check
-    body('email')
-      .isEmail()
-      .withMessage('Please enter a valid email.')
-      .custom((value, { req }) => {
-        return User.findOne({ email: value }).then(userDoc => {
-          if (userDoc) {
-            return Promise.reject('E-Mail address already exists!');
-          }
+
+const router = new express.Router()
+
+function validateSignupForm (payload) {
+  const errors = {}
+  let isFormValid = true
+  let message = ''
+
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 3) {
+    isFormValid = false
+    errors.username = 'Username must be at least 3 characters long'
+  }
+
+  // if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
+  //   isFormValid = false
+  //   errors.email = 'Please provide a correct email address'
+  // }
+
+  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 3) {
+    isFormValid = false
+    errors.password = 'Password must be at least 3 characters long'
+  }
+
+  if (!payload || typeof payload.repeatPassword !== 'string' || payload.repeatPassword.trim()!==payload.password.trim()) {
+    isFormValid = false
+    errors.password = 'Passwords must match'
+  }
+
+  if (!isFormValid) {
+    message = 'Check the form for errors.'
+  }
+
+  return {
+    success: isFormValid,
+    message,
+    errors
+  }
+}
+
+function validateLoginForm (payload) {
+  const errors = {}
+  let isFormValid = true
+  let message = ''
+
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length === 0 ) {
+    isFormValid = false
+    errors.email = 'Please provide your username.'
+  }
+
+  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
+    isFormValid = false
+    errors.password = 'Please provide your password.'
+  }
+
+  if (!isFormValid) {
+    message = 'Check the form for errors.'
+  }
+
+  return {
+    success: isFormValid,
+    message,
+    errors
+  }
+}
+
+router.post('/register', (req, res, next) => {
+  const validationResult = validateSignupForm(req.body)
+  if (!validationResult.success) {
+    return res.status(401).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors
+    })
+  }
+
+
+  return passport.authenticate('local-signup', (err) => {
+    if (err) {
+      return res.status(401).json({
+        success: false,
+        message: err
+      })
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'You have successfully signed up! Now you should be able to log in.'
+    })
+  })(req, res, next)
+})
+
+router.post('/login', (req, res, next) => {
+  const validationResult = validateLoginForm(req.body)
+  if (!validationResult.success) {
+    return res.status(401).json({
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors
+    })
+  }
+
+  return passport.authenticate('local-login', (err, token, userData) => {
+    // console.log(userData);
+    if (err) {
+      if (err.name === 'IncorrectCredentialsError') {
+        return res.status(401).json({
+          success: false,
+          message: err.message
         })
-      }),
-    body('password')
-      .trim()
-      .isLength({ min: 3 })
-      .withMessage('Please enter a valid password.'),
-    body('repeatPassword')
-      .trim()
-      .withMessage('Passwords must match!')
-      .custom((value,{req})=>{
-          return value===req.body.password
-      }),
-    // body('email')
-    //   .trim()
-    //   .not()
-    //   .isEmpty()
-    //   .withMessage('Please enter a valid name.')
-  ]
-  , authController.register);
-router.post('/login', authController.login);
+      }
 
-module.exports = router;
+      return res.status(500).json({
+        success: false,
+        message: 'Could not process the form.'
+      })
+    }
+
+    return res.json({
+      success: true,
+      message: 'You have successfully logged in!',
+      token,
+      user: userData
+    })
+  })(req, res, next)
+})
+
+router.get('/user/:username',(req,res)=>{
+  const username=req.params.username
+  User.findOne({'username':username})
+    .then(user=>{
+      return res.json({
+        success: true,
+        role: user.roles
+      })
+    })
+    .catch((e)=>{
+      return res.json({
+        success: false,
+        message:'User not found!'
+      })
+    })
+})
+
+module.exports = router

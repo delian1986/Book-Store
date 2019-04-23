@@ -3,7 +3,9 @@ import { Validators, FormsModule, FormGroup, FormBuilder } from '@angular/forms'
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { LoginModel } from 'src/app/core/models/auth/login.model';
 import { Subscription } from 'rxjs';
-import {AuthService} from './../../../core/services/auth.service';
+import { AuthService } from './../../../core/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -11,30 +13,33 @@ import {AuthService} from './../../../core/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private subscription$: Subscription
 
-  loginForm:FormGroup;
+  loginForm: FormGroup;
   constructor(
+    private spinner: NgxSpinnerService,
+
     public modalRef: MDBModalRef,
     private fb: FormBuilder,
-    private authService:AuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [ Validators.required,Validators.minLength(3)] ],
-      
+      username: [null, [Validators.required, Validators.minLength]],
+      password: [null, [Validators.required, Validators.minLength(3)]],
+
     })
   }
 
   login() {
-    const { email, password } = this.loginForm.value;
-    const loginModel=new LoginModel(email,password);
-    this.subscription$ = this.authService.login(loginModel)
-    .subscribe(()=>{
-      this.modalRef.hide();
-    });
+    this.spinner.show();
+    const { username, password } = this.loginForm.value;
+    const loginModel = new LoginModel(username, password);
+    this.authService.login(loginModel)
+      .subscribe(() => {
+        this.modalRef.hide();
+        this.spinner.hide();
+      });
 
   }
 

@@ -7,6 +7,7 @@ import { NavbarModule,
     CarouselModule, 
     CardsFreeModule,
     ButtonsModule,
+    IconsModule,
 
     
 } from 'angular-bootstrap-md'
@@ -26,6 +27,10 @@ import { CardComponent } from './card/card.component';
         CarouselModule,
         RouterModule,
         CardsFreeModule,
+        CommonModule,
+        WavesModule,
+        IconsModule,
+        ButtonsModule
         
     ],
     exports:[

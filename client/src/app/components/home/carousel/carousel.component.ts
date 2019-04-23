@@ -3,6 +3,7 @@ import BookModel from 'src/app/core/models/book/book.model';
 import { BookService } from 'src/app/core/services/book.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-carousel',
@@ -14,13 +15,14 @@ export class CarouselComponent implements OnInit {
   public books: BookModel[];
 
   constructor(
+    private spinner: NgxSpinnerService,
     private bookService: BookService,
     private store: Store<AppState>
   ) {
-
+    
   }
   slides: any = [[]];
-
+  
   chunk(arr, chunkSize) {
     let R = [];
     for (let i = 0, len = arr.length; i < len; i += chunkSize) {
@@ -29,11 +31,13 @@ export class CarouselComponent implements OnInit {
     return R;
   }
   ngOnInit() {
+    this.spinner.show();
     this.bookService.getLastBooks();
     this.store.select<BookModel[]>(state => state.book.last)
       .subscribe((books) => {
         this.books = books;
         this.slides = this.chunk(this.books,3);
+        this.spinner.hide();
       })
   }
 

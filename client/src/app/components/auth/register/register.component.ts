@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Subscription } from 'rxjs';
 import { RegisterModel } from 'src/app/core/models/auth/registerModel';
 
 @Component({
@@ -12,7 +11,6 @@ import { RegisterModel } from 'src/app/core/models/auth/registerModel';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  private subscription$: Subscription;
 
   constructor(
     public modalRef: MDBModalRef,
@@ -22,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
+      username: [null, [Validators.required, Validators.minLength(3)]],
       passwords: this.fb.group({
         password: [null, [Validators.required, Validators.minLength(3)]],
         repeatPassword: [null, [Validators.required, Validators.minLength(3)]]
@@ -38,10 +36,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const { email} = this.registerForm.value;
+    const { username} = this.registerForm.value;
     const {password,repeatPassword }=this.registerForm.value.passwords;
-    const registerModel=new RegisterModel(email,password,repeatPassword);
-    this.subscription$ = this.authService.register(registerModel)
+    const registerModel=new RegisterModel(username,password,repeatPassword);
+   this.authService.register(registerModel)
     .subscribe(()=>{
       this.modalRef.hide();
     });

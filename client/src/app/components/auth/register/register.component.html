@@ -9,12 +9,12 @@
     <form (ngSubmit)="register()" [formGroup]="registerForm">
       <div class="md-form mb-5">
         <i class="fas fa-envelope prefix grey-text"></i>
-        <input formControlName="email" type="email" id="defaultForm-email" class="form-control validate" mdbInput>
-        <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
-        <mdb-error *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">Required
+        <input formControlName="username" type="username" id="defaultForm-username" class="form-control validate" mdbInput>
+        <label data-error="wrong" data-success="right" for="defaultForm-username">Your username</label>
+        <mdb-error *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('required')">Required
           Field</mdb-error>
-        <mdb-error *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('email')">Not valid
-          email</mdb-error>
+        <mdb-error *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('username')">Not valid
+          username</mdb-error>
 
       </div>
 

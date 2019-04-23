@@ -1,5 +1,6 @@
 import BookModel from "../../models/book/book.model";
 
 export default interface BookState {
-    last: BookModel[]
+    last: BookModel[],
+    all:BookModel[]
 }

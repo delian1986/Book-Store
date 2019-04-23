@@ -18,6 +18,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BookModule } from './components/book/book.module';
 import { appReducers } from './core/store/app.reducers';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,13 @@ import { appReducers } from './core/store/app.reducers';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
+    NgxSpinnerModule,
     FormsModule,
-    SharedModule,
     AppRoutingModule,
-    HomeModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BookModule,
+    SharedModule,
+    HomeModule,
   ],
   entryComponents: [ 
     LoginComponent,

@@ -1,26 +1,20 @@
-/* eslint-disable no-console */
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+const mongoose = require('mongoose')
+const User = require('../models/User')
+const Book = require('../models/Book')
 
-const User = require('../models/User');
-const Book=require('../models/Book');
+mongoose.Promise = global.Promise
 
-module.exports = config => {
-    mongoose.connect(config.dbPath, {
-        useNewUrlParser: true
-    });       
-    const db = mongoose.connection;
-    db.once('open', err => {
-        if (err) throw err;
-        Book.seedBooks();
-        User.seedAdminUser().then(() => {
-            console.log('Database ready');                
-        }).catch((reason) => {
-            console.log('Something went wrong');
-            console.log(reason);
-        });
-    });
-    db.on('error', reason => {
-        console.log(reason);
-    });
-};
+module.exports = (settings) => {
+  mongoose.connect(settings.db)
+  let db = mongoose.connection
+
+  db.once('open', err => {
+    if (err) {
+      throw err
+    }
+    console.log('MongoDB ready!')
+    User.seedAdminUser();
+    Book.seedBooks();
+  })
+  db.on('error', err => console.log(`Database error: ${err}`))
+}
