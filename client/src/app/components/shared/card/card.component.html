@@ -3,7 +3,10 @@
   <div class="view rgba-white-slight waves-light" (mouseover)="changeText=true" (mouseout)="changeText=false"
     mdbWavesEffect>
     <!-- Card img -->
-    <mdb-card-img class="card-item" src={{book.image}} alt="Card image cap"></mdb-card-img>
+    <mdb-card-img *ngIf="!changeText" class="card-item" src={{book.image}} alt="Card image cap"></mdb-card-img>
+    <div class='desc-box' *ngIf="changeText" [@fadeAnimation]>
+        <p id="desc-first">{{book.title}}<br><span>{{book.description}}</span></p>
+        </div>
     <a>
       <div class="mask"></div>
     </a>
@@ -22,7 +25,5 @@
     <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
   </mdb-card-body>
 </mdb-card>
-<div class='desc-box' *ngIf="changeText" [@fadeAnimation]>
-<p id="desc-first">{{book.title}}<br><span>{{book.description}}</span></p>
-</div>
+
 <!-- Card -->

@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http'
 import { ToastrService } from "ngx-toastr";
 import { tap } from 'rxjs/operators';
+import { AuthService } from "../services/auth.service";
 
 
 @Injectable()
@@ -16,8 +17,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
     constructor(
         private tostr: ToastrService,
+        private authService: AuthService
     ) {
-
+        this.token = this.authService.getToken();
     }
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         if (req.url.endsWith('login')) {

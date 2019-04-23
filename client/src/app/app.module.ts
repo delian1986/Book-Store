@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './components/shared/shared.module';
 import { AppRoutingModule } from './app-routing';
 import { HomeModule } from './components/home/home.module';
@@ -16,7 +16,6 @@ import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { BookModule } from './components/book/book.module';
 import { appReducers } from './core/store/app.reducers';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
@@ -29,12 +28,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   imports: [
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({}),
-    BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     NgxSpinnerModule,
-    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

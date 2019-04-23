@@ -13,7 +13,7 @@
           mdbInput>
         <label data-error="wrong" data-success="right" for="defaultForm-username">Your username</label>
         <mdb-error *ngIf="loginForm.get('username').touched && loginForm.get('username').hasError('required')">Required Field</mdb-error>
-        <mdb-error *ngIf="loginForm.get('username').touched && loginForm.get('username').hasError('username')">Not valid username</mdb-error>
+        <mdb-error *ngIf="loginForm.get('username').touched && loginForm.get('username').hasError('minlength')">Not valid username</mdb-error>
       </div>
   
       <div class="md-form mb-4">

@@ -23,11 +23,9 @@ import { CardComponent } from './card/card.component';
     imports:[
         CommonModule,
         NavbarModule,
-        WavesModule,
         CarouselModule,
         RouterModule,
         CardsFreeModule,
-        CommonModule,
         WavesModule,
         IconsModule,
         ButtonsModule

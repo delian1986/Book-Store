@@ -51,7 +51,7 @@ router.post('/create', authCheck, (req, res) => {
       if (err.code === 11000) {
         message = 'Course with the given name already exists.'
       }
-      return res.status(200).json({
+      return res.status(401).json({
         success: false,
         message: message
       })
@@ -61,18 +61,29 @@ router.post('/create', authCheck, (req, res) => {
 )
 
 router.get('/last', (req, res) => {
-  Book.find().sort({'added':-1}).limit(6)
+  Book.find().sort({ 'added': -1 }).limit(6)
     .then(lastBooks => {
       res.status(200).json(lastBooks);
     })
 })
 
 router.get('/all', (req, res) => {
-  Book.find().sort({'added':-1})
+  Book.find().sort({ 'added': -1 })
     .then(books => {
       res.status(200).json(books);
     })
 })
+
+// router.post('/create', (req, res) => {
+//   Book.create(req.body)
+//     .then((book) => {
+//       res.status(200).json(book);
+//     }).catch((e) => {
+//       res.status(500).json('Book Creation Failed :(');
+
+//     })
+// });
+
 
 
 

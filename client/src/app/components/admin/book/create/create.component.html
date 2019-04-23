@@ -1,23 +1,75 @@
-<form (ngSubmit)="create()" [formGroup]="createBookForm">
-    <div class="md-form mb-5">
-      <i class="fas fa-envelope prefix grey-text"></i>
-      <input formControlName="title" type="text" id="defaultForm-title" class="form-control validate" 
-        mdbInput>
-      <label data-error="wrong" data-success="right" for="defaultForm-title">Your title</label>
-      <mdb-error *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('required')">Required Field</mdb-error>
-      <mdb-error *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('title')">Not valid title</mdb-error>
+<div class="container">
+  <div class="row space-top text-center">
+    <div class="col-md-12">
+      <h1 class="title">Create New Book</h1>
     </div>
+  </div>
+  <form [formGroup]="createBookForm" (ngSubmit)="create()">
+    <div class="row space-top">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-control-label" for="title">Title</label>
+          <input formControlName="title" type="text" id="defaultForm-title" class="form-control validate" />
+          <div class="col-sm-6">
+            <small *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('required')"
+              class="text-danger">
+              Title is required
+            </small>
+            <small *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('minlength')"
+              class="text-danger">
+              Title must be at least 3 symbols
+            </small>
+          </div>
+        </div>
 
-    <div class="md-form mb-4">
-      <i class="fas fa-lock prefix grey-text"></i>
-      <input formControlName="text" type="author" id="defaultForm-author" class="form-control validate" 
-        mdbInput>
-      <label data-error="wrong" data-success="right" for="defaultForm-author">Your author</label>
-      <mdb-error *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('required')">author is required!</mdb-error>
-      <mdb-error *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('minlength')">Author name must be at least 3 symbols</mdb-error>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea formControlName="description" class="form-control validate" rows="5" id="description"></textarea>
+          <div class="col-sm-6">
+            <small
+              *ngIf="createBookForm.get('description').touched && createBookForm.get('description').hasError('required')"
+              class="text-danger">
+              Description is required
+            </small>
+            <small
+              *ngIf="createBookForm.get('description').touched && createBookForm.get('description').hasError('minlength')"
+              class="text-danger">
+              Description must be at least 10 symbols
+            </small>
+          </div>
+        </div>
 
-    </div>
-    <div class="modal-footer d-flex justify-content-center">
-      <button [disabled]="createBookForm.invalid" mdbBtn color="default" class="waves-light" mdbWavesEffect>Login</button>
+        <div class="form-group">
+          <label class="form-control-label" for="title">Author</label>
+          <input formControlName="author" type="text" id="defaultForm-author" class="form-control validate" />
+          <div class="col-sm-6">
+            <small *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('required')"
+              class="text-danger">
+              Author is required
+            </small>
+            <small *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('minlength')"
+              class="text-danger">
+              Author must be at least 3 symbols
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="title">Image Url</label>
+            <input formControlName="image" type="text" id="defaultForm-image" class="form-control validate" />
+            <div class="col-sm-6">
+              <small *ngIf="createBookForm.get('image').touched && createBookForm.get('image').hasError('required')"
+                class="text-danger">
+                ImageUrl is required
+              </small>
+              <small *ngIf="createBookForm.get('image').touched && createBookForm.get('image').hasError('pattern')"
+                class="text-danger">
+                ImageUrl must be a valid url
+              </small>
+            </div>
+          </div>
+
+        <input type="submit" class="btn btn-warning" value="Create" [disabled]="createBookForm.invalid" />
+      </div>
     </div>
   </form>

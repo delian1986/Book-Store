@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import BookModel from 'src/app/core/models/book/book.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import CreateBookModel from 'src/app/core/models/book/create-book';
+import { BookService } from 'src/app/core/services/book.service';
 
 @Component({
   selector: 'app-create',
@@ -15,23 +16,25 @@ export class CreateComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private fb: FormBuilder,
+    private bookService:BookService
   ) { }
 
   ngOnInit() {
     this.createBookForm = this.fb.group({
-      username: [null, [Validators.required, Validators.minLength]],
-      password: [null, [Validators.required, Validators.minLength(3)]],
+      title: [null, [Validators.required, Validators.minLength(3)]],
+      description: [null, [Validators.required, Validators.minLength(10)]],
+      author: [null, [Validators.required, Validators.minLength(3)]],
+      image: [null, [Validators.required, Validators.pattern('http|https')]],
 
     })
   }
 
   create() {
     this.spinner.show();
-    const { username, password } = this.createBookForm.value;
-    const bookModel = new BookModel(username, password);
-    
-        this.spinner.hide();
-      });
+    const { title,description,author,image } = this.createBookForm.value;
+    const newBook = new CreateBookModel(title,description,author,image);
+    this.bookService.createBook(newBook);
+    this.spinner.hide();
 
   }
 }

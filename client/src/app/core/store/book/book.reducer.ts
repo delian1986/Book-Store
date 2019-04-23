@@ -3,22 +3,31 @@ import * as BookActions from './book.actions';
 
 const initialState: BookState = {
     last: [],
-    all:[]
+    all: []
 }
 
 function getLastBooks(state, action) {
-    return{
+    return {
         ...state,
-        last:action
+        last: action
     }
 }
 
 function getAllBooks(state, action) {
-    return{
+    return {
         ...state,
-        all:action
+        all: action
     }
 }
+
+function createBook(state, action) {
+    return {
+        ...state,
+        all: [...state.all, action],
+        last: [...state.last, action]
+    }
+}
+
 
 export function bookReducer(
     state: BookState = initialState,
@@ -31,6 +40,8 @@ export function bookReducer(
         case BookActions.GET_ALL_BOOKS:
             return getAllBooks(state, action.payload);
 
+        case BookActions.CREATE_BOOK:
+            return createBook(state, action.payload);
         default:
             return initialState;
     }

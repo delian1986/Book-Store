@@ -23,6 +23,10 @@ export class AuthService {
         return localStorage.getItem('username');
     }
 
+    getToken(){
+        return localStorage.getItem('token');
+    }
+
     isAuth(){
         return !!localStorage.getItem('token');
     }

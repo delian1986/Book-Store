@@ -14,7 +14,7 @@
         <label data-error="wrong" data-success="right" for="defaultForm-username">Your username</label>
         <mdb-error *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('required')">Required
           Field</mdb-error>
-        <mdb-error *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('username')">Not valid
+        <mdb-error *ngIf="registerForm.get('username').touched && registerForm.get('username').hasError('minlength')">Not valid
           username</mdb-error>
       </div>
       <div class="md-form mb-4" formGroupName="passwords">
