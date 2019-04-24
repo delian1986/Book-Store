@@ -12,7 +12,11 @@
   </div>
   <ng-container *ngIf="books; else emptyCart">
     <div *ngFor="let book of books">
-      <app-cart-item [book]="book"></app-cart-item>
+      <app-cart-item 
+      [book]="book"
+      (removeItem)="removeFromCart($event)"
+      (qntity)="updateQuantity($event)"
+      ></app-cart-item>
     </div>
     <div class="totals">
 

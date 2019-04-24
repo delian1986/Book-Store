@@ -2,9 +2,8 @@ import { Action } from '@ngrx/store'
 import { CartBookModel } from '../../models/cart/cart.model';
 
 export const ADD_TO_CART = '[CART] ADD'
-export const UPDATE_CART = '[CART] SYNC'
+export const UPDATE_CART = '[CART] UPDATE CART'
 export const REMOVE_FROM_CART = '[CART] REMOVE'
-export const CLEAR_CART = '[CART] CLEAR'
 
 export class AddToCart implements Action {
   readonly type: string = ADD_TO_CART
@@ -24,6 +23,3 @@ export class RemoveFromCart implements Action {
   constructor (public id: string) { }
 }
 
-export class ClearCart implements Action {
-  readonly type: string = CLEAR_CART
-}

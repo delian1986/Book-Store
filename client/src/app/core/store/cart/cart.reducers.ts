@@ -1,5 +1,5 @@
 import { CartState } from "./cart.state";
-import { ADD_TO_CART, UPDATE_CART, REMOVE_FROM_CART, CLEAR_CART } from "./cart.actions";
+import { ADD_TO_CART, UPDATE_CART, REMOVE_FROM_CART, } from "./cart.actions";
 import { CartBookModel } from "../../models/cart/cart.model";
 
 const initialState: CartState = {
@@ -10,11 +10,10 @@ function addToCart(state: CartState, book: CartBookModel) {
     if (state.books.find(b => b._id === book._id)) {
         const newProducts = state.books.slice();
         const cartProduct = newProducts.find(b => b._id === book._id);
-        cartProduct.quantity += 1;
-        // debugger
+        cartProduct.quantity =+1;
         return {
             ...state,
-            books: [cartProduct],
+            books: newProducts,
         }
 
     }
@@ -26,25 +25,23 @@ function addToCart(state: CartState, book: CartBookModel) {
 }
 
 function updateCart(state: CartState, id: string, quantity: number) {
+    // debugger
     const newProducts = state.books.slice();
     const cartProduct = newProducts.find(b => b._id === id)
     cartProduct.quantity = quantity
-
-    return Object.assign({}, state, {
-        books: newProducts
-    })
+   
+    return {
+        ...state,
+        books: newProducts,
+    }
 }
 
 function removeFromCart(state: CartState, id: string) {
-    return Object.assign({}, state, {
-        books: state.books.filter(b => b._id !== id)
-    })
-}
+    return {
+        ...state,
+        books: [...state.books.filter(b => b._id !== id)]
+    }
 
-function clearCart(state) {
-    return Object.assign({}, state, {
-        books: []
-    })
 }
 
 
@@ -52,12 +49,14 @@ export function cartReducer(state: CartState = initialState, action) {
     switch (action.type) {
         case ADD_TO_CART:
             return addToCart(state, action.payload)
+
         case UPDATE_CART:
             return updateCart(state, action.id, action.quantity)
+
         case REMOVE_FROM_CART:
             return removeFromCart(state, action.id)
-        case CLEAR_CART:
-            return clearCart(state)
+
+       
         default:
             return state
     }

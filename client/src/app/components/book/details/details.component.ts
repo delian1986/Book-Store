@@ -55,11 +55,11 @@ export class DetailsComponent implements OnInit {
       this.book.image,
       this.book.price,
       1);
+      // debugger
 
 
     this.store.dispatch(new AddToCart(bookToAdd))
     this.router.navigate(['/cart'])
-  
   }
 
   ngOnDestroy(): void {

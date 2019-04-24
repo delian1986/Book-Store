@@ -9,37 +9,40 @@ import { CartBookModel } from 'src/app/core/models/cart/cart.model';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
 import { AddToCart } from 'src/app/core/store/cart/cart.actions';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  animations:animations
+  animations: animations
 })
 
 export class CardComponent implements DoCheck {
   @Input()
-  book:BookModel;
+  book: BookModel;
 
-  isAdmin:boolean=false;
-  route:Router
+  isAdmin: boolean = false;
+  isInCart: boolean;
+  route: Router
 
   public changeText: boolean;
   constructor(
-    private authService:AuthService,
+    private authService: AuthService,
     private modalService: NgbModal,
-    private router:Router,
+    private router: Router,
     private store: Store<AppState>,
   ) {
     this.changeText = false;
 
   }
-  
+
   ngDoCheck() {
-    this.isAdmin=this.authService.getIsAdmin();
+    this.isAdmin = this.authService.getIsAdmin();
+   
   }
 
-  addToCart(){
+  addToCart() {
     if (!this.authService.isAuth()) {
       this.router.navigate(['/'])
       return
@@ -55,10 +58,10 @@ export class CardComponent implements DoCheck {
 
     this.store.dispatch(new AddToCart(bookToAdd))
     this.router.navigate(['/cart'])
-  
+
   }
 
-  deleteBook(){
+  deleteBook() {
     const deleteRef = this.modalService.open(DeleteComponent);
     deleteRef.componentInstance.book = this.book;
     deleteRef.result.then((result) => {
