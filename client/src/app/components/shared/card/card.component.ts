@@ -1,6 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, DoCheck } from '@angular/core';
 import BookModel from 'src/app/core/models/book/book.model';
 import { animations } from './card-animation';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { DeleteComponent } from '../../admin/book/delete/delete.component';
 
 @Component({
   selector: 'app-card',
@@ -8,16 +12,33 @@ import { animations } from './card-animation';
   styleUrls: ['./card.component.scss'],
   animations:animations
 })
-export class CardComponent implements OnInit {
+
+export class CardComponent implements DoCheck {
   @Input()
   book:BookModel;
 
+  isAdmin:boolean=false;
+  route:Router
+
   public changeText: boolean;
-  constructor() {
+  constructor(
+    private authService:AuthService,
+    private modalService: NgbModal
+  ) {
     this.changeText = false;
+
   }
   
-  ngOnInit() {
+  ngDoCheck() {
+    this.isAdmin=this.authService.getIsAdmin();
+  }
+
+  deleteBook(){
+    const deleteRef = this.modalService.open(DeleteComponent);
+    deleteRef.componentInstance.bookId = this.book._id;
+    deleteRef.result.then((result) => {
+    }).catch((error) => {
+    })
   }
 
 }

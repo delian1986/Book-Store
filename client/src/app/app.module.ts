@@ -18,12 +18,16 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './core/store/app.reducers';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DeleteComponent } from './components/admin/book/delete/delete.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    DeleteComponent
+    
   ],
   imports: [
     StoreModule.forRoot(appReducers),
@@ -32,6 +36,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     NgxSpinnerModule,
+    NgbModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -40,7 +45,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   entryComponents: [ 
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DeleteComponent
    ],
   providers: [
     {

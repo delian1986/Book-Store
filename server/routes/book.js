@@ -74,15 +74,40 @@ router.get('/all', (req, res) => {
     })
 })
 
-// router.post('/create', (req, res) => {
-//   Book.create(req.body)
-//     .then((book) => {
-//       res.status(200).json(book);
-//     }).catch((e) => {
-//       res.status(500).json('Book Creation Failed :(');
+router.post('/edit/:id', (req, res) => {
+  const bookId = req.params.id;
+  const newBook = req.body;
+  Book.findById(bookId)
+    .then((book) => {
+      
+        book.title= newBook.title;
+        book.description= newBook.description;
+        book.author= newBook.author;
+        book.image= newBook.image;
+        book.save()
+          .then(() => {
+            res.status(200).json(book);
+          })
+    }).catch((e) => {
+      res.status(500).json('Book edit Failed :(');
 
-//     })
-// });
+    })
+});
+
+router.delete('/delete/:id',(req,res)=>{
+  const bookId = req.params.id;
+  console.log(bookId);
+  Book.findById(bookId)
+    .then((book)=>{
+        book.remove()
+          .then(()=>{
+            res.status(200).json('Deleted!');
+          })
+    }).catch((e)=>{
+      res.status(500).json('Book delete Failed :(');
+
+    })
+});
 
 
 

@@ -5,8 +5,8 @@
     <!-- Card img -->
     <mdb-card-img *ngIf="!changeText" class="card-item" src={{book.image}} alt="Card image cap"></mdb-card-img>
     <div class='desc-box' *ngIf="changeText" [@fadeAnimation]>
-        <p id="desc-first">{{book.title}}<br><span>{{book.description}}</span></p>
-        </div>
+      <p id="desc-first">{{book.title}}<br><span>{{book.description}}</span></p>
+    </div>
     <a>
       <div class="mask"></div>
     </a>
@@ -22,7 +22,15 @@
     <mdb-card-text> {{book.author}}
     </mdb-card-text>
 
-    <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
+    <ng-container *ngIf="isAdmin; else userControls">
+      <a routerLink="/admin/edit/{{book._id}}" mdbBtn color="warning" mdbWavesEffect>Edit</a>
+      <a (click)="deleteBook()" mdbBtn color="danger" mdbWavesEffect>Delete</a>
+    </ng-container>
+
+    <ng-template #userControls>
+      <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
+    </ng-template>
+
   </mdb-card-body>
 </mdb-card>
 

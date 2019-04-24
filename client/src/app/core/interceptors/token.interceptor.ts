@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
         private tostr: ToastrService,
         private authService: AuthService
     ) {
-        this.token = this.authService.getToken();
+        this.token = authService.getToken();
     }
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         if (req.url.endsWith('login')) {

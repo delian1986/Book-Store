@@ -2,15 +2,7 @@ import BookState from "./book.state";
 import * as BookActions from './book.actions';
 
 const initialState: BookState = {
-    last: [],
     all: []
-}
-
-function getLastBooks(state, action) {
-    return {
-        ...state,
-        last: action
-    }
 }
 
 function getAllBooks(state, action) {
@@ -24,7 +16,21 @@ function createBook(state, action) {
     return {
         ...state,
         all: [...state.all, action],
-        last: [...state.last, action]
+    }
+}
+
+function editBook(state, action) {
+    return {
+        ...state,
+        all: [...state.all.filter(p => p._id !== action._id), action]
+    }
+}
+
+function deleteBook(state, action) {
+    debugger
+    return {
+        ...state,
+        all: [...state.all.filter(b => b._id !== action), action]
     }
 }
 
@@ -34,14 +40,17 @@ export function bookReducer(
     action: BookActions.Types
 ) {
     switch (action.type) {
-        case BookActions.GET_LAST_BOOKS:
-            return getLastBooks(state, action.payload);
-
         case BookActions.GET_ALL_BOOKS:
             return getAllBooks(state, action.payload);
 
         case BookActions.CREATE_BOOK:
             return createBook(state, action.payload);
+
+        case BookActions.EDIT_BOOK:
+            return editBook(state, action.payload);
+
+        case BookActions.DELETE_BOOK:
+            return deleteBook(state, action.payload);
         default:
             return initialState;
     }

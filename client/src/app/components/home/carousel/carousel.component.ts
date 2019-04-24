@@ -32,10 +32,11 @@ export class CarouselComponent implements OnInit {
   }
   ngOnInit() {
     this.spinner.show();
-    this.bookService.getLastBooks();
-    this.store.select<BookModel[]>(state => state.book.last)
+    this.bookService.getAllBooks();
+    this.store.select<BookModel[]>(state => state.book.all)
       .subscribe((books) => {
-        this.books = books;
+        this.books = books.sort((a, b) => new Date(b.added).getTime() - new Date(a.added).getTime())
+        .slice(0, 6);
         this.slides = this.chunk(this.books,3);
         this.spinner.hide();
       })

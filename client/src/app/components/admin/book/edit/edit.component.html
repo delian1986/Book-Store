@@ -1,21 +1,21 @@
 <div class="container">
   <div class="row space-top text-center">
     <div class="col-md-12">
-      <h1 class="title">Create New Book</h1>
+      <h1 class="title">Edit Book: {{book.title}}</h1>
     </div>
   </div>
-  <form [formGroup]="createBookForm" (ngSubmit)="create()">
+  <form [formGroup]="editBookForm" (ngSubmit)="edit()">
     <div class="row space-top">
       <div class="col-md-6">
         <div class="form-group">
           <label class="form-control-label" for="title">Title</label>
-          <input formControlName="title" type="text" id="defaultForm-title" class="form-control validate" />
+          <input formControlName="title" type="text" id="defaultForm-title" class="form-control validate"/>
           <div class="col-sm-6">
-            <small *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('required')"
+            <small *ngIf="editBookForm.get('title').touched && editBookForm.get('title').hasError('required')"
               class="text-danger">
               Title is required
             </small>
-            <small *ngIf="createBookForm.get('title').touched && createBookForm.get('title').hasError('minlength')"
+            <small *ngIf="editBookForm.get('title').touched && editBookForm.get('title').hasError('minlength')"
               class="text-danger">
               Title must be at least 3 symbols
             </small>
@@ -24,15 +24,15 @@
 
         <div class="form-group">
           <label for="description">Description:</label>
-          <textarea formControlName="description" class="form-control validate" rows="5" id="description">{{123}}</textarea>
+          <textarea formControlName="description" class="form-control validate" rows="5" id="description"></textarea>
           <div class="col-sm-6">
             <small
-              *ngIf="createBookForm.get('description').touched && createBookForm.get('description').hasError('required')"
+              *ngIf="editBookForm.get('description').touched && editBookForm.get('description').hasError('required')"
               class="text-danger">
               Description is required
             </small>
             <small
-              *ngIf="createBookForm.get('description').touched && createBookForm.get('description').hasError('minlength')"
+              *ngIf="editBookForm.get('description').touched && editBookForm.get('description').hasError('minlength')"
               class="text-danger">
               Description must be at least 10 symbols
             </small>
@@ -43,11 +43,11 @@
           <label class="form-control-label" for="title">Author</label>
           <input formControlName="author" type="text" id="defaultForm-author" class="form-control validate" />
           <div class="col-sm-6">
-            <small *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('required')"
+            <small *ngIf="editBookForm.get('author').touched && editBookForm.get('author').hasError('required')"
               class="text-danger">
               Author is required
             </small>
-            <small *ngIf="createBookForm.get('author').touched && createBookForm.get('author').hasError('minlength')"
+            <small *ngIf="editBookForm.get('author').touched && editBookForm.get('author').hasError('minlength')"
               class="text-danger">
               Author must be at least 3 symbols
             </small>
@@ -58,18 +58,18 @@
             <label class="form-control-label" for="title">Image Url</label>
             <input formControlName="image" type="text" id="defaultForm-image" class="form-control validate" />
             <div class="col-sm-6">
-              <small *ngIf="createBookForm.get('image').touched && createBookForm.get('image').hasError('required')"
+              <small *ngIf="editBookForm.get('image').touched && editBookForm.get('image').hasError('required')"
                 class="text-danger">
                 ImageUrl is required
               </small>
-              <small *ngIf="createBookForm.get('image').touched && createBookForm.get('image').hasError('pattern')"
+              <small *ngIf="editBookForm.get('image').touched && editBookForm.get('image').hasError('pattern')"
                 class="text-danger">
                 ImageUrl must be a valid url
               </small>
             </div>
           </div>
 
-        <input type="submit" class="btn btn-warning" value="Create" [disabled]="createBookForm.invalid" />
+        <input type="submit" class="btn btn-warning" value="Create" [disabled]="editBookForm.invalid" />
       </div>
     </div>
   </form>
