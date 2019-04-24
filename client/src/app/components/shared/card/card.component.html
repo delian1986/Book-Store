@@ -1,5 +1,5 @@
 <!-- Card -->
-<mdb-card>
+<mdb-card routerLink="/book/details/{{book._id}}">
   <div class="view rgba-white-slight waves-light" (mouseover)="changeText=true" (mouseout)="changeText=false"
     mdbWavesEffect>
     <!-- Card img -->
@@ -28,7 +28,7 @@
     </ng-container>
 
     <ng-template #userControls>
-      <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a>
+      <a (click)="addToCart()" mdbBtn color="primary" mdbWavesEffect>Buy</a>
     </ng-template>
 
   </mdb-card-body>

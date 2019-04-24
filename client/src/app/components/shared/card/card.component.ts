@@ -33,9 +33,13 @@ export class CardComponent implements DoCheck {
     this.isAdmin=this.authService.getIsAdmin();
   }
 
+  addToCart(){
+    
+  }
+
   deleteBook(){
     const deleteRef = this.modalService.open(DeleteComponent);
-    deleteRef.componentInstance.bookId = this.book._id;
+    deleteRef.componentInstance.book = this.book;
     deleteRef.result.then((result) => {
     }).catch((error) => {
     })

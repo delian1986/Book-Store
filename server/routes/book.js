@@ -109,6 +109,17 @@ router.delete('/delete/:id',(req,res)=>{
     })
 });
 
+router.get('/details/:id',(req,res)=>{
+  const bookId=req.params.id;
+
+  Book.findById(bookId)
+    .then((book)=>{
+            res.status(200).json(book);
+    }).catch((e)=>{
+      res.status(404).json('Book not found :(');
+    })
+})
+
 
 
 

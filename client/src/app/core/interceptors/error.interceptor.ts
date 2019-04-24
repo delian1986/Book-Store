@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           case 400:
           case 401:
           case 422:
-          
+          case 404:
           case 500:
             if (err.error.errors) {
               const message = Object.keys(err.error.errors)

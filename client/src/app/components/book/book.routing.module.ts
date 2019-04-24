@@ -4,14 +4,17 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { BookListComponent } from "./book-list/book-list.component";
 import { SharedModule } from "../shared/shared.module";
 import { CommonModule } from "@angular/common";
+import { DetailsComponent } from './details/details.component';
 
 const bookRoutes: Route[] = [
     { path: 'all', component: BookListComponent },
+    { path: 'details/:id', component: DetailsComponent },
 ]
 
 @NgModule({
     declarations:[
-        BookListComponent
+        BookListComponent,
+        DetailsComponent
     ],
     imports: [
         CommonModule,

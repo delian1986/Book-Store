@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, DoCheck } from '@angular/core';
 import BookModel from 'src/app/core/models/book/book.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BookService } from 'src/app/core/services/book.service';

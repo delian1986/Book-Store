@@ -1,0 +1,14 @@
+<h1 class="my-4">Book title : {{book?.title}}
+</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <img class="img-fluid" src={{book?.image}} alt="{{book?.title}}" />
+    </div>
+    <div class="col-md-4 text-center">
+        <h3 class="my-3">Book Description</h3>
+        <p>{{book?.description}}</p>
+        <a (click)="addToCart()"><button type="button"
+                class="btn btn-info">Buy</button></a>
+    </div>
+</div>
