@@ -19,6 +19,11 @@ const userSchema = new Schema({
     [{
       type: String
     }],
+  orders: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Order'
+  }
+  ]
 
 });
 

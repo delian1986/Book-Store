@@ -47,6 +47,9 @@ export class TokenInterceptor implements HttpInterceptor {
                 if (res instanceof HttpResponse && res.body && req.url.endsWith('register')) {
                     this.tostr.success(res.body.message)
                 }
+
+                
+
             }))
     }
 
@@ -55,11 +58,13 @@ export class TokenInterceptor implements HttpInterceptor {
         const userId = body.user.userId;
         const isAdmin = body.user.isAdmin;
         const username = body.user.username;
+        // const orders = body.user.orders.join(', ');
 
         localStorage.setItem('token', authToken);
         localStorage.setItem('userId', userId);
         localStorage.setItem('isAdmin', isAdmin.toString());
         localStorage.setItem('username', username);
+        // localStorage.setItem('orders', orders);
         this.tostr.success(body.message);
 
     }

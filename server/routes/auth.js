@@ -2,11 +2,12 @@ const express = require('express')
 const passport = require('passport')
 const validator = require('validator')
 const User = require('../models/User')
+const Order = require('../models/Order')
 
 
 const router = new express.Router()
 
-function validateSignupForm (payload) {
+function validateSignupForm(payload) {
   const errors = {}
   let isFormValid = true
   let message = ''
@@ -26,7 +27,7 @@ function validateSignupForm (payload) {
     errors.password = 'Password must be at least 3 characters long'
   }
 
-  if (!payload || typeof payload.repeatPassword !== 'string' || payload.repeatPassword.trim()!==payload.password.trim()) {
+  if (!payload || typeof payload.repeatPassword !== 'string' || payload.repeatPassword.trim() !== payload.password.trim()) {
     isFormValid = false
     errors.password = 'Passwords must match'
   }
@@ -42,12 +43,12 @@ function validateSignupForm (payload) {
   }
 }
 
-function validateLoginForm (payload) {
+function validateLoginForm(payload) {
   const errors = {}
   let isFormValid = true
   let message = ''
 
-  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length === 0 ) {
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length === 0) {
     isFormValid = false
     errors.email = 'Please provide your username.'
   }
@@ -129,21 +130,59 @@ router.post('/login', (req, res, next) => {
   })(req, res, next)
 })
 
-router.get('/user/:username',(req,res)=>{
-  const username=req.params.username
-  User.findOne({'username':username})
-    .then(user=>{
-      return res.json({
-        success: true,
-        role: user.roles
+router.post('/checkout/:username', (req, res) => {
+  const username = req.params.username;
+  const books = req.body;
+  // console.log(newOrder);
+
+  let orderObj = {
+    creator: username,
+    books
+  }
+
+  Order
+    .create(orderObj)
+    .then((createdOrder) => {
+      console.log(createdOrder);
+      res.status(200).json(createdOrder);
+    })
+    .catch((err) => {
+      console.log(err)
+      const message = 'Something went wrong :('
+      return res.status(400).json({
+        success: false,
+        message: message
       })
     })
-    .catch((e)=>{
-      return res.json({
-        success: false,
-        message:'User not found!'
-      })
+
+
+})
+
+router.get('/checkout/:username',(req,res)=>{
+  const username = req.params.username;
+
+  Order
+    .find({creator: username})
+    .then(orders => {
+      res.status(200).json(orders)
     })
 })
+
+router.get('/checkout/order/:id',(req,res)=>{
+  const orderId = req.params.id;
+
+  Order
+  .findById(orderId)
+  .then(order => {
+    console.log(order);
+    res.status(200).json(order)
+  }).catch((e)=>{
+    res.status(404).json('Not Found!')
+
+  })
+
+
+})
+
 
 module.exports = router

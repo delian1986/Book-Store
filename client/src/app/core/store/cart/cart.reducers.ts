@@ -1,5 +1,5 @@
 import { CartState } from "./cart.state";
-import { ADD_TO_CART, UPDATE_CART, REMOVE_FROM_CART, } from "./cart.actions";
+import { ADD_TO_CART, UPDATE_CART, REMOVE_FROM_CART, CLEAR_CART, } from "./cart.actions";
 import { CartBookModel } from "../../models/cart/cart.model";
 
 const initialState: CartState = {
@@ -44,6 +44,13 @@ function removeFromCart(state: CartState, id: string) {
 
 }
 
+function clearCart (state) {
+    return {
+        ...state,
+        books: [],
+    }
+  }
+
 
 export function cartReducer(state: CartState = initialState, action) {
     switch (action.type) {
@@ -56,7 +63,8 @@ export function cartReducer(state: CartState = initialState, action) {
         case REMOVE_FROM_CART:
             return removeFromCart(state, action.id)
 
-       
+            case CLEAR_CART:
+            return clearCart(state)
         default:
             return state
     }

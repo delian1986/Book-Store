@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'admin', loadChildren: './components/admin/admin.module#AdminModule',canLoad:[AdminGuard] },
   { path: 'book', loadChildren: './components/book/book.module#BookModule',canLoad:[AuthGuard] },
   { path: 'cart', loadChildren: './components/cart/cart.module#CartModule', canLoad: [AuthGuard] },
+  { path: 'order', loadChildren: './components/order/order.module#OrderModule', canLoad: [AuthGuard] },
   { path: '**', component: NotFoundComponent }
 ];
 

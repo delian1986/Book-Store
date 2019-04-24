@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
 import { RemoveFromCart, UpdateCart } from 'src/app/core/store/cart/cart.actions';
+import { CheckoutService } from 'src/app/core/services/checkout.service';
+import CheckoutModel from 'src/app/core/models/checkout/checkout.model';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +17,8 @@ export class CartComponent implements OnInit {
   total: number;
   private subscription$: Subscription[] = [];
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private chekoutService:CheckoutService,
   ) { }
 
   ngOnInit() {
@@ -50,6 +53,11 @@ export class CartComponent implements OnInit {
     }
     
     this.calculateTotal();
+  }
+
+  checkout(){
+    // let checkout=new CheckoutModel(this.books);
+      this.chekoutService.checkout(this.books);
   }
 
   ngOnDestroy(): void {

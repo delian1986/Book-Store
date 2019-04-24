@@ -29,7 +29,8 @@ module.exports = new PassportLocalStrategy({
       const data = {
         username: user.username,
         userId: user._id,
-        isAdmin:user.roles[0]==='Admin'
+        isAdmin:user.roles[0]==='Admin',
+        orders:user.orders
       }
 
       if (user.roles) {
