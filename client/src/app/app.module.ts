@@ -20,14 +20,17 @@ import { appReducers } from './core/store/app.reducers';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeleteComponent } from './components/admin/book/delete/delete.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DeleteComponent
-    
+    DeleteComponent,
+    CartComponent,
+    CartItemComponent
   ],
   imports: [
     StoreModule.forRoot(appReducers),

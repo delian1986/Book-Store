@@ -13,12 +13,14 @@ import { NavbarModule,
 } from 'angular-bootstrap-md'
 import { RouterModule } from "@angular/router";
 import { CardComponent } from './card/card.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
     declarations:[
         NavigationComponent,
         FooterComponent,
-        CardComponent
+        CardComponent,
+        NotFoundComponent,
     ],
     imports:[
         CommonModule,

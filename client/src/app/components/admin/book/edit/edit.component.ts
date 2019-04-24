@@ -38,6 +38,7 @@ export class EditComponent implements OnInit {
       title: [null, [Validators.required, Validators.minLength(3)]],
       description: [null, [Validators.required, Validators.minLength(10)]],
       author: [null, [Validators.required, Validators.minLength(3)]],
+      price: [null, [Validators.required, Validators.min(0)]],
       image: [null, [Validators.required, Validators.pattern('http|https')]],
       
     })
@@ -51,6 +52,7 @@ export class EditComponent implements OnInit {
       title: this.book.title,
       description: this.book.description,
       author: this.book.author,
+      price: this.book.price,
       image: this.book.image
     })
   }

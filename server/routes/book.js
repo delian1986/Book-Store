@@ -83,6 +83,7 @@ router.post('/edit/:id', (req, res) => {
         book.title= newBook.title;
         book.description= newBook.description;
         book.author= newBook.author;
+        book.price= newBook.price;
         book.image= newBook.image;
         book.save()
           .then(() => {

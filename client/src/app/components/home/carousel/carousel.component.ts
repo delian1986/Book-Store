@@ -4,6 +4,7 @@ import { BookService } from 'src/app/core/services/book.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/store/app.state';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-carousel',
@@ -13,6 +14,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class CarouselComponent implements OnInit {
   @Output()
   public books: BookModel[];
+
+  subsctibe$:Subscription[]=[];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -33,13 +36,18 @@ export class CarouselComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.bookService.getAllBooks();
-    this.store.select<BookModel[]>(state => state.book.all)
+    this.subsctibe$.push(this.store.select<BookModel[]>(state => state.book.all)
       .subscribe((books) => {
         this.books = books.sort((a, b) => new Date(b.added).getTime() - new Date(a.added).getTime())
         .slice(0, 6);
         this.slides = this.chunk(this.books,3);
         this.spinner.hide();
-      })
+      }))
+  }
+
+  ngOnDestroy(): void {
+    this.subsctibe$.forEach(sub=>sub.unsubscribe());
+    
   }
 
 }

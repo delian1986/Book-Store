@@ -5,6 +5,7 @@ export default class BookModel {
         public description: string,
         public author: string,
         public image: string,
+        public price:number,
         public added?:Date
     ) { }
 }

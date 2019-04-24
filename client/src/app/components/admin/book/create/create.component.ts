@@ -24,6 +24,7 @@ export class CreateComponent implements OnInit {
       title: [null, [Validators.required, Validators.minLength(3)]],
       description: [null, [Validators.required, Validators.minLength(10)]],
       author: [null, [Validators.required, Validators.minLength(3)]],
+      price: [null, [Validators.required, Validators.min(0)]],
       image: [null, [Validators.required, Validators.pattern('http|https')]],
 
     })
@@ -31,8 +32,8 @@ export class CreateComponent implements OnInit {
 
   create() {
     this.spinner.show();
-    const { title,description,author,image } = this.createBookForm.value;
-    const newBook = new CreateBookModel(title,description,author,image);
+    const { title,description,author,image,price } = this.createBookForm.value;
+    const newBook = new CreateBookModel(title,description,author,image,price);
     this.bookService.createBook(newBook);
     this.spinner.hide();
 

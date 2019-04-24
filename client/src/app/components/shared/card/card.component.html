@@ -1,5 +1,5 @@
 <!-- Card -->
-<mdb-card routerLink="/book/details/{{book._id}}">
+<mdb-card >
   <div class="view rgba-white-slight waves-light" (mouseover)="changeText=true" (mouseout)="changeText=false"
     mdbWavesEffect>
     <!-- Card img -->
@@ -8,7 +8,7 @@
       <p id="desc-first">{{book.title}}<br><span>{{book.description}}</span></p>
     </div>
     <a>
-      <div class="mask"></div>
+      <div class="mask" routerLink="/book/details/{{book._id}}"></div>
     </a>
   </div>
   <!--Card content-->
@@ -19,7 +19,7 @@
     </mdb-card-title>
 
     <!--Text-->
-    <mdb-card-text> {{book.author}}
+    <mdb-card-text> {{book.author}} | {{book.price}} $
     </mdb-card-text>
 
     <ng-container *ngIf="isAdmin; else userControls">

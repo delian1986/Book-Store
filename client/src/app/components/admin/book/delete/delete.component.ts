@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BookService } from 'src/app/core/services/book.service';
 import BookModel from 'src/app/core/models/book/book.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-delete',
@@ -9,7 +10,6 @@ import BookModel from 'src/app/core/models/book/book.model';
   styleUrls: ['./delete.component.scss']
 })
 export class DeleteComponent implements OnInit {
-  // faWindowClose = faWindowClose
 
   @Input() private book: BookModel
   constructor(
@@ -21,7 +21,7 @@ export class DeleteComponent implements OnInit {
   }
 
   delete(){
-    this.bookService.deleteBook(this.book, this.activeModal)
+    this.bookService.deleteBook(this.book, this.activeModal);
   }
 
 }

@@ -3,6 +3,7 @@ export default class CreateBookModel {
         public title: string,
         public description: string,
         public author: string,
-        public image: string
+        public image: string,
+        public price:number
     ) { }
 }
