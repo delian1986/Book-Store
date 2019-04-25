@@ -1,7 +1,7 @@
 # Book-Store Single Page App
 "Book-Store" is a single page application written on MEAN stack for SoftUni JS Web Course. The application consists of users, books, shopping cart and orders.
 
-![alt](https://imgur.com/ifZ7jKd)
+![alt](https://i.imgur.com/ifZ7jKd.gif)
 ## Key Functionalities
 
  - Anonymous users can view landing page only.
