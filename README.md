@@ -7,6 +7,7 @@
  - Anonymous users can view landing page only.
  - Registered users is able to access book details and order books. 
  - Admin can CRUD books.
+ - Cart CRUD
 
 ## Installation
 
